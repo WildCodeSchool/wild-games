@@ -1,7 +1,9 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const path = require('path');
 
 const games = require('./api.json');
 const PORT = process.env.PORT || 5000;
@@ -10,8 +12,17 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan('combined'));
 app.disable('x-powered-by');
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/:id', (req, res) => {
+app.get('/', (_, res) => {
+  res.sendFile(path.join(__dirname + '/README.html'));
+});
+
+app.get('/games/', (_, res) => {
+  res.status(200).json(games);
+});
+
+app.get('/games/:id', (req, res) => {
   const { id } = req.params;
 
   const game = games.find((g) => g.id === +id);
@@ -24,10 +35,6 @@ app.get('/:id', (req, res) => {
       msg: 'Not Found',
     });
   }
-});
-
-app.get('/', (_, res) => {
-  res.status(200).json(games);
 });
 
 app.listen(PORT, (err) => {
