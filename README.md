@@ -1,6 +1,6 @@
 # Show All Games
 
-Get all games fro mthe database
+Get all games from the database
 
 **URL** : `/`
 
@@ -25,13 +25,12 @@ https://wild-games.jsrover.wilders.dev/
     "rating": 4.47,
     "saturated_color": "0f0f0f",
     "dominant_color": "0f0f0f",
-    "genres": [...],
-    "clip": {...},
-    "short_screenshots": [...]
+    "genres": [],
+    "clip": {},
+    "short_screenshots": []
   },
-  {...},
-  {...},
-  //...
+  {},
+  {},
 ]
 ```
 
@@ -61,8 +60,8 @@ https://wild-games.jsrover.wilders.dev/13536
   "rating": 4.49,
   "saturated_color": "0f0f0f",
   "dominant_color": "0f0f0f",
-  "genres": [...],
-  "clip": {...},
-  "short_screenshots": [...]
+  "genres": [],
+  "clip": {},
+  "short_screenshots": []
 }
 ```
