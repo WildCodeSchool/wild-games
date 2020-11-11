@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
+const { errorHandler, notFound } = require('./middlewares');
 const games = require('./api.json');
 const PORT = process.env.PORT || 5000;
 
@@ -11,7 +12,7 @@ app.use(helmet());
 app.use(morgan('combined'));
 app.disable('x-powered-by');
 
-app.get('/:id', (req, res) => {
+app.get('/:id', async (req, res, next) => {
   const { id } = req.params;
 
   const game = games.find((g) => g.id === +id);
@@ -19,16 +20,16 @@ app.get('/:id', (req, res) => {
   if (game) {
     return res.status(200).json(game);
   } else {
-    return res.status(404).json({
-      status: '404',
-      msg: 'Not Found',
-    });
+    return next(new Error());
   }
 });
 
 app.get('/', (_, res) => {
   res.status(200).json(games);
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, (err) => {
   if (err) {
