@@ -2,7 +2,7 @@
 
 Get all games from the database
 
-**URL** : `/`
+**URL** : `/games/`
 
 **Method** : `GET`
 
@@ -12,7 +12,7 @@ Get all games from the database
 
 **Content examples**
 
-https://wild-games.jsrover.wilders.dev/
+https://wild-games.jsrover.wilders.dev/games/
 
 ```json
 [
@@ -30,7 +30,7 @@ https://wild-games.jsrover.wilders.dev/
     "short_screenshots": []
   },
   {},
-  {},
+  {}
 ]
 ```
 
@@ -38,7 +38,7 @@ https://wild-games.jsrover.wilders.dev/
 
 Get the details of a game by its id.
 
-**URL** : `/:id`
+**URL** : `/games/:id`
 
 **Method** : `GET`
 
@@ -48,7 +48,7 @@ Get the details of a game by its id.
 
 **Content examples**
 
-https://wild-games.jsrover.wilders.dev/13536
+https://wild-games.jsrover.wilders.dev/games/13536
 
 ```json
 {
