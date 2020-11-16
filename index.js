@@ -5,7 +5,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 const games = require('./api.json');
 
 const { errorHandler, notFound } = require('./middlewares');
@@ -39,9 +38,4 @@ app.get('/games/:id', (req, res, next) => {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(PORT, (err) => {
-  if (err) {
-    throw new Error('Something bad happened ...');
-  }
-  console.log(`Listening to ${PORT}.`);
-});
+exports.wild_games = app;
