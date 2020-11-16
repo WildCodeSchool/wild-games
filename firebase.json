@@ -1,0 +1,21 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/wild-games",
+        "function": "wild_games"
+      }
+      ,
+      {
+        "source": "/wild-games/**",
+        "function": "wild_games"
+      }
+    ]
+  }
+}

@@ -15,15 +15,15 @@ app.use(morgan('combined'));
 app.disable('x-powered-by');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (_, res) => {
+app.get('/wild-games', (_, res) => {
   res.sendFile(path.join(__dirname + '/README.html'));
 });
 
-app.get('/games', (_, res) => {
+app.get('/wild-games/games', (_, res) => {
   res.status(200).json(games);
 });
 
-app.get('/games/:id', (req, res, next) => {
+app.get('/wild-games/games/:id', (req, res, next) => {
   const { id } = req.params;
 
   const game = games.find((g) => g.id === +id);
