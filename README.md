@@ -12,7 +12,7 @@ Get all games from the database
 
 **Content examples**
 
-[/games/][/games/]
+[games/][games/]
 
 ```json
 [
@@ -48,7 +48,7 @@ Get the details of a game by its id.
 
 **Content examples**
 
-[games/13536][/games/13536]
+[games/13536][games/13536]
 
 ```json
 {
