@@ -2,7 +2,7 @@
 
 Get all games from the database
 
-**URL** : `/games/`
+**URL** : `/wild-games/games/`
 
 **Method** : `GET`
 
@@ -12,7 +12,7 @@ Get all games from the database
 
 **Content examples**
 
-[games/][games/]
+[/wild-games/games/][/wild-games/games/]
 
 ```json
 [
@@ -38,7 +38,7 @@ Get all games from the database
 
 Get the details of a game by its id.
 
-**URL** : `/games/:id`
+**URL** : `/wild-games/games/:id`
 
 **Method** : `GET`
 
@@ -48,7 +48,7 @@ Get the details of a game by its id.
 
 **Content examples**
 
-[games/13536][games/13536]
+[/wild-games/games/13536][/wild-games/games/13536]
 
 ```json
 {
