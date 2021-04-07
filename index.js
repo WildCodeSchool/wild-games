@@ -5,7 +5,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 const games = require('./api.json');
 
 const { errorHandler, notFound } = require('./middlewares');
@@ -16,15 +15,15 @@ app.use(morgan('combined'));
 app.disable('x-powered-by');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (_, res) => {
+app.get('/wild-games', (_, res) => {
   res.sendFile(path.join(__dirname + '/README.html'));
 });
 
-app.get('/games', (_, res) => {
+app.get('/wild-games/games', (_, res) => {
   res.status(200).json(games);
 });
 
-app.get('/games/:id', (req, res, next) => {
+app.get('/wild-games/games/:id', (req, res, next) => {
   const { id } = req.params;
 
   const game = games.find((g) => g.id === +id);
@@ -39,9 +38,4 @@ app.get('/games/:id', (req, res, next) => {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(PORT, (err) => {
-  if (err) {
-    throw new Error('Something bad happened ...');
-  }
-  console.log(`Listening to ${PORT}.`);
-});
+exports.wild_games = app;
