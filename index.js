@@ -2,7 +2,7 @@ const Hapi = require('@hapi/hapi');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
-const controller = require('./routes');
+const routes = require('./routes');
 const Pack = require('./package');
 
 (async () => {
@@ -26,7 +26,7 @@ const Pack = require('./package');
     },
   ]);
 
-  server.route(controller);
+  server.route(routes);
 
   try {
     await server.start();
