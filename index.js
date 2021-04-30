@@ -8,6 +8,9 @@ const Pack = require('./package');
 (async () => {
   const server = await new Hapi.Server({
     port: process.env.PORT || 5000,
+    routes: {
+      cors: true,
+    },
   });
 
   const swaggerOptions = {
