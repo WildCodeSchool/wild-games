@@ -1,47 +1,40 @@
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
+const Hapi = require('@hapi/hapi');
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
+const HapiSwagger = require('hapi-swagger');
+const routes = require('./routes');
+const Pack = require('./package');
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-const games = require('./api.json');
+(async () => {
+  const server = await new Hapi.Server({
+    port: process.env.PORT || 5000,
+    routes: {
+      cors: true,
+    },
+  });
 
-const { errorHandler, notFound } = require('./middlewares');
+  const swaggerOptions = {
+    info: {
+      title: 'Wild Games API Documentation',
+      version: Pack.version,
+    },
+  };
 
-app.use(cors());
-app.use(helmet());
-app.use(morgan('combined'));
-app.disable('x-powered-by');
-app.use(express.static(path.join(__dirname, 'public')));
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ]);
 
-app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname + '/README.html'));
-});
+  server.route(routes);
 
-app.get('/games', (_, res) => {
-  res.status(200).json(games);
-});
-
-app.get('/games/:id', (req, res, next) => {
-  const { id } = req.params;
-
-  const game = games.find((g) => g.id === +id);
-
-  if (game) {
-    return res.status(200).json(game);
-  } else {
-    return next(new Error());
+  try {
+    await server.start();
+    console.log('Server running at:', server.info.uri);
+  } catch (err) {
+    console.log(err);
   }
-});
-
-app.use(notFound);
-app.use(errorHandler);
-
-app.listen(PORT, (err) => {
-  if (err) {
-    throw new Error('Something bad happened ...');
-  }
-  console.log(`Listening to ${PORT}.`);
-});
+})();
